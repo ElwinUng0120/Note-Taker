@@ -61,8 +61,7 @@ async function handleNoteDelete( event, noteId ){
   event.preventDefault()
 
   // prevents the click listener for the list from being called when the button inside of it is clicked
-  if( !confirm('Are you sure you want to delete this?') )
-    return
+  if( !confirm('Are you sure you want to delete this?') ) return
 
   // delete the note
   const response = await callUrl( `/api/notes/${noteId}`, {}, 'delete' )
