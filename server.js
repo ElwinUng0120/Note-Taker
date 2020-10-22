@@ -36,12 +36,14 @@ app.post("/api/notes", function(req, res){
 });
 
 app.delete("/api/notes/:id", function(req, res){
-    const selectedNote = req.params.id;
-    if(noteList.hasOwnProperty(selectedNote)){
-        noteList[selectedNote] = "";
-        res.send({message: `Note id: ${selectedNote} is deleted`});
+    const selectedNoteID = req.params.id;
+    if(noteList.findIndex(i => i.id == selectedNoteID) != -1){
+        const index = noteList.findIndex(i => i.id == selectedNoteID);
+        noteList.splice(index+1, 1);
+        fs.writeFileSync(dbFile, noteList);
+        res.send({message: `Note id: ${selectedNoteID} is deleted`});
     }
-    else res.send({message: `Note id: ${selectedNote} not found in database`});
+    else res.send({message: `Note id: ${selectedNoteID} not found in database`});
 
 });
 
