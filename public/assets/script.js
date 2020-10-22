@@ -103,7 +103,7 @@ function handleCreateNewNote( event ){
 const handleShowSaveBtn = function ( event ) {
   console.log( `[handleShowSaveBtn]`)
   // if it's an already-created note, then can't edit!
-  if( activeNote.id || ($('noteTitle').val().trim()==='' && $('#noteText').val().trim()==='') ){
+  if( activeNote.id || ($.trim($('#noteTitle').val())==='') && ($.trim($('#noteText').val())==='')){
     $('#saveNoteBtn').addClass('d-none')
   } else {
     console.log( ' ... showing the save button!' )
