@@ -39,7 +39,7 @@ app.delete("/api/notes/:id", function(req, res){
     const selectedNoteID = req.params.id;
     if(noteList.findIndex(i => i.id == selectedNoteID) != -1){
         const index = noteList.findIndex(i => i.id == selectedNoteID);
-        noteList.splice(index+1, 1);
+        noteList.splice(index, 1);
         fs.writeFileSync(dbFile, noteList);
         res.send({message: `Note id: ${selectedNoteID} is deleted`});
     }
