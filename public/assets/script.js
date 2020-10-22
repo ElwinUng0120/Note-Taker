@@ -124,7 +124,7 @@ async function loadAndDisplayNotes(){
   }
 
   notes.forEach( (note) => {
-    $('#noteList').html(`
+    $('#noteList').append(`
       <li onClick="handleShowNote(event)" id='${note.id}' data-title="${note.title}" data-text="${note.text}" class='list-group-item'><span>${note.title}</span>
       <small onClick="handleNoteDelete(event,'${note.id}')" class='badge bg-secondary float-right'><i class='fas fa-trash-alt icon-resize-small'></i></small>
       `);
