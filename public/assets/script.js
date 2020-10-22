@@ -42,8 +42,8 @@ async function handleNoteSave(event){
   event.preventDefault()
 
   const newNote = {
-    title: $('#noteTItle').value,
-    text: $('#noteText').value,
+    title: $('#noteTItle').val(),
+    text: $('#noteText').val(),
   };
 
   // let it save the note before we trigger a re-render

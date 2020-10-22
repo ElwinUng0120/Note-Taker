@@ -30,8 +30,10 @@ app.post("/api/notes", function(req, res){
         title: req.body.title,
         text: req.body.text
     }
+    console.log(newNote);
     noteList.push(newNote);
     fs.appendFileSync(dbFile, newNote);
+    res.send({message: "Note saved!"});
 });
 
 app.delete("/api/notes/:id", function(req, res){
