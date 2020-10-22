@@ -1,8 +1,3 @@
-const el_noteTitle = document.querySelector('#noteTitle');
-const el_noteText = document.querySelector('#noteText');
-const el_saveNoteBtn = document.querySelector('#saveNoteBtn');
-const el_newNoteBtn = document.querySelector('#newNoteBtn');
-
 // activeNote is used to keep track of the note in the textarea
 let activeNote = {};
 
