@@ -30,7 +30,6 @@ app.post("/api/notes", function(req, res){
         title: req.body.title,
         text: req.body.text
     }
-    console.log(newNote);
     noteList.push(newNote);
     fs.appendFileSync(dbFile, newNote);
     res.send({message: "Note saved!"});
@@ -39,11 +38,10 @@ app.post("/api/notes", function(req, res){
 app.delete("/api/notes/:id", function(req, res){
     const selectedNote = req.params.id;
     if(noteList.hasOwnProperty(selectedNote)){
-        console.log("Note found");
         noteList[selectedNote] = "";
-        res.send(`Note id: ${selectedNote} is deleted`);
+        res.send({message: `Note id: ${selectedNote} is deleted`});
     }
-    else res.send(`Note id: ${selectedNote} not found in database`);
+    else res.send({message: `Note id: ${selectedNote} not found in database`});
 
 });
 

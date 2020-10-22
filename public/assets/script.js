@@ -42,7 +42,7 @@ async function handleNoteSave(event){
   event.preventDefault()
 
   const newNote = {
-    title: $('#noteTItle').val(),
+    title: $('#noteTitle').val(),
     text: $('#noteText').val(),
   };
 
