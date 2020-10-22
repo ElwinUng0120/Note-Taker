@@ -3,7 +3,7 @@ const uuid = require('uuid');
 const fs = require('fs');
 const app = express();
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
 // will share any static html files with the browser
 app.use( express.static('public') );
@@ -15,15 +15,16 @@ const dbFile = './app/db.json';
 
 // let noteList = [{id: "0000-0000-0000-0000", title: 'note1', text: 'note1 text'}];
 let noteList = JSON.parse(fs.readFileSync(dbFile));
+console.log(noteList);
 
 // Endpoints =================================================
 
 // for app.post: newNote.id = uuid.v4() // use a random unique id.
-app.get("/api/notes", function(req, res){
+app.get("localhost:3000/api/notes", function(req, res){
     res.json(noteList);
 });
 
-app.post("/api/notes", function(req, res){
+app.post("localhost:3000/api/notes", function(req, res){
     const newNote = {
         id: uuid.v4(),
         title: req.body.title,
@@ -33,7 +34,7 @@ app.post("/api/notes", function(req, res){
     fs.appendFileSync(dbFile, newNote);
 });
 
-app.delete("/api/notes/:id", function(req, res){
+app.delete("localhost:3000/api/notes/:id", function(req, res){
     const selectedNote = req.params.id;
     if(noteList.hasOwnProperty(selectedNote)){
         console.log("Note found");

@@ -25,15 +25,15 @@ function updateActiveCard(){
   el_saveNoteBtn.classList.add('d-none');
 
   if (activeNote.id) {
-    el_noteTitle.readOnly = true;
-    el_noteText.readOnly = true;
-    el_noteTitle.value = activeNote.title;
-    el_noteText.value = activeNote.text;
+    $('#noteTitle').prop('readOnly', true);
+    $('#noteText').prop('readOnly', true);
+    $('#noteTItle').val(activeNote.title);
+    $('#noteText').val(activeNote.text);
   } else {
-    el_noteTitle.readOnly = false;
-    el_noteText.readOnly = false;
-    el_noteTitle.value = "";
-    el_noteText.value = "";
+    $('#noteTitle').prop('readOnly', false);
+    $('#noteText').prop('readOnly', false);
+    $('#noteTItle').val("");
+    $('#noteText').val("");
   }
 };
 
@@ -42,8 +42,8 @@ async function handleNoteSave(event){
   event.preventDefault()
 
   const newNote = {
-    title: el_noteTitle.value,
-    text: el_noteText.value,
+    title: $('#noteTItle').value,
+    text: $('#noteText').value,
   };
 
   // let it save the note before we trigger a re-render
@@ -103,11 +103,11 @@ function handleCreateNewNote( event ){
 const handleShowSaveBtn = function ( event ) {
   console.log( `[handleShowSaveBtn]`)
   // if it's an already-created note, then can't edit!
-  if( activeNote.id || (el_noteTitle.value.trim()==='' && el_noteText.value.trim()==='') ){
-    el_saveNoteBtn.classList.add('d-none')
+  if( activeNote.id || ($('noteTitle').val().trim()==='' && $('#noteText').val().trim()==='') ){
+    $('#saveNoteBtn').addClass('d-none')
   } else {
     console.log( ' ... showing the save button!' )
-    el_saveNoteBtn.classList.remove('d-none')
+    $('#saveNoteBtn').removeClass('d-none');
   }
 };
 
@@ -115,21 +115,19 @@ const handleShowSaveBtn = function ( event ) {
 async function loadAndDisplayNotes(){
   const notes = await fetch( '/api/notes' ).then( r=>r.json() )
 
-  const el_noteList = document.querySelector("#noteList");
-
   // clear the list
-  el_noteList.innerHTML = '';
+  $('#noteList').html('');
 
   if( notes.length===0 ){
-    el_noteList.innerHTML = `<li class='list-group-item'><span>No save Notes</span></li>`
+    $('#noteList').html(`<li class='list-group-item'><span>No save Notes</span></li>`);
     return
   }
 
   notes.forEach( (note) => {
-    el_noteList.innerHTML += `
+    $('#noteList').html(`
       <li onClick="handleShowNote(event)" id='${note.id}' data-title="${note.title}" data-text="${note.text}" class='list-group-item'><span>${note.title}</span>
       <small onClick="handleNoteDelete(event,'${note.id}')" class='badge bg-secondary float-right'><i class='fas fa-trash-alt icon-resize-small'></i></small>
-      `
+      `);
   });
 };
 
