@@ -20,11 +20,11 @@ console.log(noteList);
 // Endpoints =================================================
 
 // for app.post: newNote.id = uuid.v4() // use a random unique id.
-app.get("localhost:3000/api/notes", function(req, res){
+app.get("/api/notes", function(req, res){
     res.json(noteList);
 });
 
-app.post("localhost:3000/api/notes", function(req, res){
+app.post("/api/notes", function(req, res){
     const newNote = {
         id: uuid.v4(),
         title: req.body.title,
@@ -34,7 +34,7 @@ app.post("localhost:3000/api/notes", function(req, res){
     fs.appendFileSync(dbFile, newNote);
 });
 
-app.delete("localhost:3000/api/notes/:id", function(req, res){
+app.delete("/api/notes/:id", function(req, res){
     const selectedNote = req.params.id;
     if(noteList.hasOwnProperty(selectedNote)){
         console.log("Note found");
