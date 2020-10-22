@@ -27,7 +27,7 @@ function updateActiveCard(){
   if (activeNote.id) {
     $('#noteTitle').prop('readOnly', true);
     $('#noteText').prop('readOnly', true);
-    $('#noteTItle').val(activeNote.title);
+    $('#noteTitle').val(activeNote.title);
     $('#noteText').val(activeNote.text);
   } else {
     $('#noteTitle').prop('readOnly', false);
