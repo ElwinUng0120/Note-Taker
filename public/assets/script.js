@@ -22,7 +22,7 @@ function callUrl( url, data={}, method='post' ){
 // If there is an activeNote, display it, otherwise render empty inputs
 function updateActiveCard(){
   // hide 
-  el_saveNoteBtn.classList.add('d-none');
+  $('#saveNoteBtn').addClass('d-none');
 
   if (activeNote.id) {
     $('#noteTitle').prop('readOnly', true);
@@ -32,7 +32,7 @@ function updateActiveCard(){
   } else {
     $('#noteTitle').prop('readOnly', false);
     $('#noteText').prop('readOnly', false);
-    $('#noteTItle').val("");
+    $('#noteTitle').val("");
     $('#noteText').val("");
   }
 };
