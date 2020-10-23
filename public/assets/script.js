@@ -19,6 +19,7 @@ function updateActiveCard(){
   // hide 
   $('#saveNoteBtn').addClass('d-none');
 
+  // if active note already has an id, display its content
   if (activeNote.id) {
     $('#noteTitle').prop('readOnly', true);
     $('#noteText').prop('readOnly', true);
@@ -36,6 +37,7 @@ function updateActiveCard(){
 async function handleNoteSave(event){
   event.preventDefault()
 
+  // getting new note contents
   const newNote = {
     title: $('#noteTitle').val(),
     text: $('#noteText').val(),
@@ -47,11 +49,14 @@ async function handleNoteSave(event){
   console.log( ` .. got from server: `, response )
   if( response.message ) alert( response.message )
 
+  // reloading noteList
   loadAndDisplayNotes()
+  // resetting active note card
   activeNote = {}
   updateActiveCard()
 };
 
+// Delete the corresponding note when the delete button is pressed
 async function handleNoteDelete( event, noteId ){
   event.preventDefault()
 
@@ -77,6 +82,7 @@ function handleShowNote( event ){
   event.preventDefault();
   const id = event.currentTarget.id;
   console.log( `[handleShowNote] two ways: id='${id}' dataset: `, event.currentTarget.dataset )
+  // setting active note to the note clicked
   activeNote = {
     id,
     title: event.currentTarget.dataset.title,
@@ -113,11 +119,13 @@ async function loadAndDisplayNotes(){
   // clear the list
   $('#noteList').html('');
 
+  // if db.json has no saved notes
   if( notes.length===0 ){
     $('#noteList').html(`<li class='list-group-item'><span>No save Notes</span></li>`);
     return
   }
 
+  // adding each note in db.json as a new card in under noteList
   notes.forEach( (note) => {
     $('#noteList').append(`
       <li onClick="handleShowNote(event)" id='${note.id}' data-title="${note.title}" data-text="${note.text}" class='list-group-item'><span>${note.title}</span>
